@@ -1,0 +1,12 @@
+11/25/2013
+Term Project Week 2
+
+~ I created a basic UI and Scoring System. 
+
+~ Trigonometric algorithms are now in place to create circular movement
+
+~ ALOT Of math and improvements to path system and movement system. 
+
+~ There is an Actual game to play now. 
+
+~ Fixed Various Crashes. 

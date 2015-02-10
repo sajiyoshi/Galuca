@@ -1,0 +1,34 @@
+In class Player Testing Notes:
+
+MVarner:
+- Confused as to whether or not the "life" ships were actually hers or not. 
+SOLUTION: Lower the images, make them a bit smaller. 
+
+- Needs a "Get Ready" screen when transitioning between levels. 
+
+- Needs a Reposition animation for the enemies. 
+
+Idea for customization
+Spline curve like effect which averages the points drawn to give smoother curves. 
+
+DBasu:
+- NEEDS GET READY SCREEN
+This is a major problem with the game at the moment despite the fact that it's easily fixable. 
+
+-Possibly add options for new ships at the start. 
+
+SGoyal:
+- GET READY SCREEN
+- Also suggested curve smoothing for the custimization screen. 
+
+Ftso:
+-Also experienced confusion with life ships. 
+
+-Also reccomended a "Get Ready" screen. 
+
+
+Major Necessities:
+Clear markings for when you can move. 
+Make the fighter able to move between levels. 
+
+
