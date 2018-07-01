@@ -8,7 +8,7 @@ import math
 import copy
 
 class Galaga(object):
-    baseScaleFactor = 2.5 #Changes the game Window Size 
+    baseScaleFactor = 2.0 #Changes the game Window Size 
     def __init__(self):
         self.baseScaleFactor = Galaga.baseScaleFactor #Adjusts default window size
         self.baseWidth = 224
@@ -216,7 +216,7 @@ class Galaga(object):
         self.music.play(startScreenMusic,-1)
 
         #Font Objects
-        textSize = int(self.header/3.5)
+        textSize = int(self.header/1.8)
         self.gameFont = pygame.font.SysFont("Joystix",textSize)
 
         #Custom Screen
@@ -226,7 +226,7 @@ class Galaga(object):
 
     def initButtons(self):
        #Logo
-        logoScale = .9
+        logoScale = .6
         logoFile = "galaga_sprites/galaga-logo.png"
         (self.logo,self.logoHeight,self.logoWidth) = \
         importImage(logoFile,True,logoScale)
@@ -243,22 +243,22 @@ class Galaga(object):
         #Start Button
         self.startClicked = False
         startButtonLocation = (self.baseScreenWidth/2,self.baseScreenHeight*.5)
-        startButtonScale = 3
+        startButtonScale = 2
         startButtonFile = "galaga_sprites/text/start.png"
         startLightFile = "galaga_sprites/text/startLight.png"
         self.startButton = Button(startButtonLocation,startButtonScale,
                                  startButtonFile,startLightFile)
 
         sKeyLogo = "galaga_sprites/text/s.png"
-        sKeyLocation = (startButtonLocation[0]+self.startButton.width/2+50,
+        sKeyLocation = (startButtonLocation[0]+self.startButton.width/2+20,
                         startButtonLocation[1])
-        self.sKeyLogo = Button(sKeyLocation, startButtonScale,sKeyLogo)
+        self.sKeyLogo = Button(sKeyLocation, startButtonScale*1.5, sKeyLogo)
 
         #Custom Button
         self.customClicked = False
         self.customScreen = False
         customButtonLocation = (self.baseScreenWidth/2,self.baseScreenHeight*.6)
-        customButtonScale = 3
+        customButtonScale = 2
         customButtonFile = "galaga_sprites/text/custom.png"
         customLgtFile = "galaga_sprites/text/customLight.png"
         self.customButton = Button(customButtonLocation,customButtonScale,
@@ -268,11 +268,12 @@ class Galaga(object):
         self.howToPlay = False
         self.howToPlayClicked = False
         howToPlayLocation = (self.baseScreenWidth/2,self.baseScreenHeight*.7)
-        howToPlayScale = 3
+        howToPlayScale = 2
         howToPlayFile = "galaga_sprites/buttons/howToPlay.png"
         howToPlayLgt = "galaga_sprites/buttons/howToPlayLgt.png"
         self.howToPlayButton = Button(howToPlayLocation,howToPlayScale,
                                       howToPlayFile,howToPlayLgt)
+
         #Mute Button
         self.muteMusic = False
         muteButtonLocation = (self.baseScreenWidth/10,
@@ -301,7 +302,7 @@ class Galaga(object):
     def initCustomScreenButtons(self):
         #Reset All Button
         resetLoc = (self.baseScreenWidth/2,self.baseScreenHeight*.95)
-        resetScale = 3
+        resetScale = 2
         resetButtonFile = "galaga_sprites/buttons/resetAll.png"
         resetButtonLgt = "galaga_sprites/buttons/resetAllLgt.png"
         self.resetButton = Button(resetLoc,resetScale,resetButtonFile,
@@ -451,7 +452,7 @@ class Galaga(object):
         
     def initInGameButtons(self):
         #Get Ready
-        getReadyLocation = (self.baseScreenWidth/2,self.baseScreenHeight*.4)
+        getReadyLocation = (self.baseScreenWidth/2,self.baseScreenHeight*.6)
         getReadyScale = 3
         getReadyFile = "galaga_sprites/buttons/getReady.png"
         self.getReadyButton =Button(getReadyLocation,getReadyScale,getReadyFile)
@@ -610,6 +611,7 @@ class Galaga(object):
 
     def drawHowToPlay(self):
         self.drawHowToPlayButtons()
+        self.howtoquitMsg()
 
     def drawHowToPlayButtons(self):
         self.backButton.draw(self)
@@ -819,7 +821,7 @@ class Galaga(object):
         self.gameOver = False
 
         self.hiScore = self.findHiScore()
-
+        
         self.fighterIsDown = False
 
         #Missile Objects
@@ -904,12 +906,11 @@ class Galaga(object):
 
         level = "Level %s" % self.level
         levelText = self.gameFont.render(level, 1, (0,224,255),(0,0,0))
-        levelTextLocation =\
-        ((int(((self.baseScreenWidth * self.baseScaleFactor)*.24)*\
-        self.scaleFactor)),
-         ((int(((self.baseScreenHeight*self.baseScaleFactor)+\
-            self.header+self.footer)*self.scaleFactor*.35))))
-        self.screen.blit(levelText, levelTextLocation)
+        levelTextRect = levelText.get_rect()
+        levelTextRect.right = int(((self.baseScreenWidth * self.baseScaleFactor)*.49)*\
+        self.scaleFactor)
+        levelTextRect.top = int(self.baseScreenHeight * self.scaleFactor - self.footer)
+        self.screen.blit(levelText, levelTextRect)
         
         self.drawLives()
         
@@ -925,13 +926,19 @@ class Galaga(object):
     def drawScore(self):
         score = str(self.score)
         score = self.gameFont.render(score,1,(255,255,255),(0,0,0))
-        self.screen.blit(score,(int(self.baseScreenWidth*self.baseScaleFactor*self.scaleFactor*.01),50))
+        scoreRect = score.get_rect()
+        scoreRect.right = int(self.baseScreenWidth*self.baseScaleFactor*self.scaleFactor*0.125)
+        scoreRect.top = 20
+        self.screen.blit(score, scoreRect)
 
         if self.score > self.hiScore:
             self.hiScore = self.score
         hiScore = str(self.hiScore)
         hiScore = self.gameFont.render(hiScore,1,(255,255,255),(0,0,0))
-        self.screen.blit(hiScore,(int(self.baseScreenWidth*self.baseScaleFactor*self.scaleFactor*.16),50))
+        hiScoreRect = hiScore.get_rect()
+        hiScoreRect.centerx = int(self.baseScreenWidth*self.baseScaleFactor*self.scaleFactor*0.25)
+        hiScoreRect.top = 20
+        self.screen.blit(hiScore, hiScoreRect)
               
     def drawEnemies(self):
         for enemy in self.enemyList:
@@ -1122,13 +1129,25 @@ class Galaga(object):
                     Enemy.maxAttackingEnemies += 1
 
     def gameOverMsg(self):
-        endText = self.gameFont.render("Game Over!",1,(255,0,0),(0,0,0))
-
-        self.screen.blit(endText,(self.baseScreenWidth*self.scaleFactor/2 - \
-        100,self.baseScreenHeight * self.scaleFactor/2 + self.header * \
-        self.scaleFactor/2))
+        endText = self.gameFont.render("Game Over! press q for quit",True,(255,0,0),(0,0,0))
+        endTextRect = endText.get_rect()
+        endTextRect.centerx = self.baseScreenWidth*self.scaleFactor/2
+        endTextRect.top = self.baseScreenHeight * self.scaleFactor/2 + self.header * \
+        self.scaleFactor/2
+        self.screen.blit(endText,endTextRect)
 
         pygame.display.update()
+
+    def howtoquitMsg(self):
+        howtoquitText = self.gameFont.render("press q for quit",True,(255,255,255),(0,0,0))
+        howtoquitTextRect = howtoquitText.get_rect()
+        howtoquitTextRect.centerx = self.baseScreenWidth*self.scaleFactor/2
+        howtoquitTextRect.top = self.baseScreenHeight * self.scaleFactor/2 + self.header * \
+        self.scaleFactor/2
+        self.screen.blit(howtoquitText,howtoquitTextRect)
+
+        pygame.display.update()
+
 
     def resetGame(self):
         self.score = 0
@@ -1150,11 +1169,14 @@ class Galaga(object):
         hiScoreList = hiScoreStr.split("\n")
         hiScores.close()
         hiScores = []
+        if not hiScoreStr:
+            hiScores.append(eval("2000"))
         for item in hiScoreList:
-            hiScores.append(eval(item))
+            if item:
+                hiScores.append(eval(item))
         return max(hiScores)
-        
 
+ 
 ###################
 #Utility Functions#
 ###################
