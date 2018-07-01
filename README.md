@@ -3,10 +3,11 @@
 カーネギーメロン大学のプログラミング初学者向け講座での課題で制作されたようで、敵機の襲来パターンをカスタマイズできる機能が追加されています。
 
 緑色のClone or downloadボタン -> Download ZIPのあと、以下のコマンドで起動します。
+```
 $ unzip Galuca-master.zip
 $ cd Galuca-master
 $ python Galuca-Final.py
-
+```
 ----------------------------------------
 
 
