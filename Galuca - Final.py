@@ -8,7 +8,7 @@ import math
 import copy
 
 class Galaga(object):
-    baseScaleFactor = 2.0 #Changes the game Window Size 
+    baseScaleFactor = 1.8 #Changes the game Window Size 
     def __init__(self):
         self.baseScaleFactor = Galaga.baseScaleFactor #Adjusts default window size
         self.baseWidth = 224
