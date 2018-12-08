@@ -11,12 +11,11 @@ $ python Galuca-Final.py
 ----------------------------------------
 
 
-
- This is the README for GALUCA
-	Created by Luca Damasco
+これは、GALUCAのREADMEです
+ これは、**Luca Damasco**によって作られました。
 ----------------------------------------
 Galuca was created as a term project for Carnegie Mellon
-University's Introduction to Programming class 15-112. It 
+University's Introduction to Programming class 15-112. It
 is meant to replicate the fixed shooter arcade game Galaga
 (originally published in 1981 by Namco and Midway). It also aims
 to allow user to customize their gaming experience by creating their own
