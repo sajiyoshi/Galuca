@@ -12,7 +12,7 @@ $ python Galuca-Final.py
 
 
 これは、GALUCAのREADMEです
- これは、**Luca Damasco**によって作られました。
+ これは、***Luca Damasco***によって作られました。
 ----------------------------------------
 Galuca was created as a term project for Carnegie Mellon
 University's Introduction to Programming class 15-112. It
